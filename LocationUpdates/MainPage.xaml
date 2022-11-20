@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:locationupdates="clr-namespace:LocationUpdates"
+             x:Class="LocationUpdates.MainPage"
+             x:DataType="locationupdates:MainViewModel">
+    <Grid RowDefinitions="auto,*">
+        <Button Text="{Binding LocationUpdatesEnabled, 
+                Converter={StaticResource LocationButtonTextConverter}}"
+                Command="{Binding ChangeLocationUpdatesCommand}"/>
+        <CollectionView ItemsSource="{Binding Updates}"
+                        Grid.Row="1"
+                        VerticalScrollBarVisibility="Always"
+                        ItemTemplate="{StaticResource LocationUpdatesTemplateSelector}"/>
+    
+    </Grid>
+</ContentPage>

@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:models="clr-namespace:LocationUpdates.Models" xmlns:templateselectors="clr-namespace:LocationUpdates.TemplateSelectors">
+
+    <converters:BoolToObjectConverter
+        x:Key="LocationButtonTextConverter"
+        x:TypeArguments="x:String"
+        TrueObject="Stop Location Updates"
+        FalseObject="Start Location Updates"/>
+
+    <DataTemplate x:Key="LocationTemplate"
+                  x:DataType="models:LocationModel">
+        <Grid RowDefinitions="*,*,*,auto"
+              ColumnDefinitions="*,auto">
+
+            <Label Text="Latitude"/>
+            <Label Text="{Binding Latitude, StringFormat='{0:F4}'}"
+                   Grid.Column="1"/>
+
+            <Label Text="Longitude"
+                   Grid.Row="1"/>
+            <Label Text="{Binding Longitude, StringFormat='{0:F4}'}"
+                   Grid.Column="1"
+                   Grid.Row="1"/>
+
+            <Label Text="Bearing"
+                   Grid.Row="2"/>
+            <Label Text="{Binding Bearing, StringFormat='{0:F4}'}"
+                   Grid.Column="1"
+                   Grid.Row="2"/>
+
+            <BoxView Grid.Row="3"
+                     Grid.ColumnSpan="2"
+                     BackgroundColor="{StaticResource Primary}"
+                     HeightRequest="2"/>
+
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="StatusTemplate"
+                  x:DataType="x:String">
+       <Label Text="{Binding .}"
+              FontAttributes="Bold"
+              FontSize="Large"
+              TextColor="{StaticResource Tertiary}"/>
+    </DataTemplate>
+
+    <templateselectors:LocationUpdatesTemplateSelector
+        x:Key="LocationUpdatesTemplateSelector"
+        LocationTemplate="{StaticResource LocationTemplate}"
+        StatusTemplate="{StaticResource StatusTemplate}"/>
+
+</ResourceDictionary>
